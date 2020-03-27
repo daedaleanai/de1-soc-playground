@@ -39,6 +39,8 @@
 #
 # For more information, please refer to <http://unlicense.org>
 #-------------------------------------------------------------------------------
+# Modified by Lukasz Janyst <lukasz@jany.st>
+#-------------------------------------------------------------------------------
 
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CSEMA5F31C6
@@ -426,25 +428,25 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to IRDA_RXD
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to IRDA_TXD
 
 #-------------------------------------------------------------------------------
-# KEY_N
+# KEY
 #-------------------------------------------------------------------------------
-set_location_assignment PIN_AA14 -to KEY_N[0]
-set_location_assignment PIN_AA14 -to KEY_N_0
-set_location_assignment PIN_AA15 -to KEY_N[1]
-set_location_assignment PIN_AA15 -to KEY_N_1
-set_location_assignment PIN_W15  -to KEY_N[2]
-set_location_assignment PIN_W15  -to KEY_N_2
-set_location_assignment PIN_Y16  -to KEY_N[3]
-set_location_assignment PIN_Y16  -to KEY_N_3
+set_location_assignment PIN_AA14 -to KEY[0]
+set_location_assignment PIN_AA14 -to KEY_0
+set_location_assignment PIN_AA15 -to KEY[1]
+set_location_assignment PIN_AA15 -to KEY_1
+set_location_assignment PIN_W15  -to KEY[2]
+set_location_assignment PIN_W15  -to KEY_2
+set_location_assignment PIN_Y16  -to KEY[3]
+set_location_assignment PIN_Y16  -to KEY_3
 
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY_N[0]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY_N_0
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY_N[1]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY_N_1
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY_N[2]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY_N_2
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY_N[3]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY_N_3
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY_0
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY_1
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY_2
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY_3
 
 #-------------------------------------------------------------------------------
 # LED
