@@ -43,7 +43,7 @@ spl: check-bsp assembly
     --settings spl/settings.bsp
 
 clean:
-> rm -rf $(NAME).qpf $(NAME).qsf
+> rm -rf $(NAME).qpf $(NAME).qsf $(NAME).qws
 > rm -rf incremental_db
 > rm -rf output_files
 > rm -rf hps_sdram_p0_all_pins.txt
@@ -54,3 +54,4 @@ clean:
 > rm -rf hps_isw_handoff
 > rm -rf spl
 > rm -rf fpga-payload.rbf
+> rm -rf .qsys_edit
