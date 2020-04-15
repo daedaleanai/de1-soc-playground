@@ -20,7 +20,6 @@ work:
     export PATH=$PATH:/path/to/quartus-prime-lite/19.1/quartus/sopc_builder/bin
     export PATH=$PATH:/path/to/quartus-prime-lite/19.1/embedded/host_tools/altera/preloadergen/
 
-
 Furthermore, the Qsys installation seems to be broken by default in version 19.1
 in that it cannot find some of the Perl libraries it installs. It is necessary
 to set the `PERL5LIB` path manually:
