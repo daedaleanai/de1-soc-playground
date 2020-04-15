@@ -6,43 +6,49 @@ SHELL := bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
-.PHONY: all clean check-quartus check-qsys project system synthesis fitting assembly payload spl
+.PHONY: all clean project system synthesis fitting assembly payload spl
 all: payload spl
 
-check-quartus:
-> @which quartus_sh >/dev/null || echo "quartus_sh tools not found in your path" || exit 1
-
-check-qsys:
-> @which qsys-generate >/dev/null || echo "qsys-generate not found in your path" || exit 1
-
-check-bsp:
-> @which bsp-create-settings >/dev/null || echo "bsp-create-settings not found in your path" || exit 1
-
-project: check-quartus
+.sentinel.project:
 > quartus_sh -t ../../helpers/new-project.tcl $(NAME)
+> touch $@
 
-system: check-qsys
+.sentinel.system:
 > qsys-generate --synthesis=VERILOG system.qsys
+> touch $@
 
-synthesis: project system
+.sentinel.synthesis: .sentinel.project .sentinel.system
 > quartus_map --read_settings_files=on --write_settings_files=off $(NAME) -c $(NAME)
 > quartus_sh -t ../../helpers/assign-hps-sdram-pins.tcl $(NAME)
+> touch $@
 
-fitting: synthesis
+.sentinel.fitting: .sentinel.synthesis
 > quartus_fit --read_settings_files=on --write_settings_files=off $(NAME) -c $(NAME)
+> touch $@
 
-assembly: fitting
+.sentinel.assembly: .sentinel.fitting
 > quartus_asm --read_settings_files=on --write_settings_files=off $(NAME) -c $(NAME)
+> touch $@
 
-payload: assembly
+fpga-payload.rbf: .sentinel.assembly
 > quartus_cpf -c output_files/$(NAME).sof fpga-payload.rbf
 
-spl: check-bsp assembly
+.sentinel.spl: .sentinel.assembly
 > bsp-create-settings --type spl --bsp-dir spl              \
     --preloader-settings-dir "hps_isw_handoff/system_hps_0" \
     --settings spl/settings.bsp
+> touch $@
+
+project: .sentinel.project
+system: .sentinel.system
+synthesis: .sentinel.synthesis
+fitting: .sentinel.fitting
+assembly: .sentinel.assembly
+payload: fpga-payload.rbf
+spl: .sentinel.spl
 
 clean:
+> rm -rf .sentinel.*
 > rm -rf $(NAME).qpf $(NAME).qsf $(NAME).qws
 > rm -rf incremental_db
 > rm -rf output_files
